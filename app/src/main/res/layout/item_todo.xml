@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card:cardCornerRadius="5dp"
+    card:cardElevation="5dp"
+    card:cardUseCompatPadding="true">
+
+    <ImageView
+        android:layout_width="6dp"
+        android:layout_height="110dp"
+        android:contentDescription="@string/color"
+        android:src="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:id="@id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/ic_delete"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            tools:text="@string/title" />
+
+        <TextView
+            android:id="@+id/tv_createdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:textSize="12sp"
+            tools:text="Create Date" />
+
+        <com.codesgood.views.JustifiedTextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_createdate"
+            android:layout_marginTop="10dp"
+            android:layout_toStartOf="@+id/date"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="@string/content" />
+
+        <LinearLayout
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_update"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_updatedate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="Update Date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/due_date"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_duedate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="Reminder Date" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ic_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/delete"
+            android:src="@drawable/ic_delete" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

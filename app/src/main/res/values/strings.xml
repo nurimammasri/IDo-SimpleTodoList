@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">IDo - Simple Todo List</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="pleaseEnterTitle">Please enter title</string>
+    <string name="pleaseEnterContent">Please enter content</string>
+    <string name="pleaseEnterDueDate">Please enter due date</string>
+    <string name="pleaseEnterDueTime">Please enter due time</string>
+    <string name="viewOrEditTodo">View/Edit Todo</string>
+    <string name="createTodo">Create Todo</string>
+    <string name="color">color</string>
+    <string name="last_update">Last Update</string>
+    <string name="due_date">Due Date</string>
+    <string name="set_date">Set Date</string>
+    <string name="set_time">Set Time</string>
+    <string name="set_due_date">Set Due Date</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="reminder_set_for">Reminder set for</string>
+
+    <string-array name="sort_types">
+        <item>Default</item>
+        <item>Sort by Create Date</item>
+        <item>Sort by Due Date</item>
+    </string-array>
 </resources>
