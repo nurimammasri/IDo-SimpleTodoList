@@ -1,7 +1,8 @@
-package com.imam.ido_simpletodolist
+package com.imam.ido_simpletodolist.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.imam.ido_simpletodolist.R
 
 class MainActivity : AppCompatActivity() {
 
