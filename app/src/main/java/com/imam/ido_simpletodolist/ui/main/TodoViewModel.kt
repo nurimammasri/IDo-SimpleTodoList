@@ -10,6 +10,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: TodoRepository = TodoRepository(application)
     private val allTodoList: LiveData<List<Todo>>? = repository.getAllTodoList()
+    private val allOrderbyCreateTodoList: LiveData<List<Todo>>? =
+        repository.getOrderbyCreateTodoList()
+    private val allOrderbyDueDateTodoList: LiveData<List<Todo>>? =
+        repository.getOrderbyDueDateTodoList()
 
     fun insertTodo(todo: Todo) {
         repository.insert(todo)
@@ -25,5 +29,13 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllTodoList(): LiveData<List<Todo>>? {
         return allTodoList
+    }
+
+    fun getOrderbyCreateTodoList(): LiveData<List<Todo>>? {
+        return allOrderbyCreateTodoList
+    }
+
+    fun getOrderbyDueDateTodoList(): LiveData<List<Todo>>? {
+        return allOrderbyDueDateTodoList
     }
 }

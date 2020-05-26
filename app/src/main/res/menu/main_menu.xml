@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_sort"
+        android:title="@string/sort"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/sort_default"
+                android:icon="@drawable/ic_sort_default"
+                android:title="@string/sort_default"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/sort_bycreate"
+                android:icon="@drawable/ic_sort_create"
+                android:title="@string/sort_create"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/sort_bydue"
+                android:icon="@drawable/ic_sort_due"
+                android:title="@string/sort_due"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_about"
+        android:title="@string/about"
+        app:showAsAction="ifRoom" />
+</menu>

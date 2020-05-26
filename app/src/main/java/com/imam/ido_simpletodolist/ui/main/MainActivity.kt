@@ -3,6 +3,8 @@ package com.imam.ido_simpletodolist.ui.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -99,4 +101,42 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
+
+    /**
+     * Initialize Menu on Main
+     **/
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sort_default -> {
+                todoViewModel.getAllTodoList()?.observe(this, Observer {
+                    todoAdapter.setAllTodoList(it)
+                })
+            }
+            R.id.sort_bycreate -> {
+                todoViewModel.getOrderbyCreateTodoList()?.observe(this, Observer {
+                    todoAdapter.setAllTodoList(it)
+                })
+            }
+            R.id.sort_bydue -> {
+                todoViewModel.getOrderbyDueDateTodoList()?.observe(this, Observer {
+                    todoAdapter.setAllTodoList(it)
+                })
+            }
+            R.id.search -> {
+
+            }
+            R.id.about -> {
+
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
 }

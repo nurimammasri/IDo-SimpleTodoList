@@ -11,6 +11,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -162,6 +163,7 @@ class CreateTodoActivity : AppCompatActivity() {
                     dueAt = it
                 )
             }
+            Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
             val intent = Intent()
             intent.putExtra(Constants.INTENT_OBJECT, todo)
             setResult(RESULT_OK, intent)

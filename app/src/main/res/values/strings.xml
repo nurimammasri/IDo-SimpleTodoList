@@ -19,10 +19,10 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="reminder_set_for">Reminder set for</string>
-
-    <string-array name="sort_types">
-        <item>Default</item>
-        <item>Sort by Create Date</item>
-        <item>Sort by Due Date</item>
-    </string-array>
+    <string name="about">About</string>
+    <string name="search">Search</string>
+    <string name="sort">Sort</string>
+    <string name="sort_default">Default</string>
+    <string name="sort_create">Sort by Create Date</string>
+    <string name="sort_due">Sort by Due Date</string>
 </resources>

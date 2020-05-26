@@ -24,4 +24,10 @@ interface TodoDao {
 
     @Query("Select * from todo")
     fun getAllTodoList(): LiveData<List<Todo>>
+
+    @Query("SELECT * FROM todo ORDER BY created_at ASC")
+    fun getOrderbyCreateTodoList(): LiveData<List<Todo>>
+
+    @Query("SELECT * FROM todo ORDER BY due_date ASC")
+    fun getOrderbyDueDateTodoList(): LiveData<List<Todo>>
 }
