@@ -1,6 +1,8 @@
 package com.imam.ido_simpletodolist.ui.main
 
 import android.app.Activity
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +10,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +20,7 @@ import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+
 
 class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
@@ -102,12 +106,31 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         alertDialog.show()
     }
 
+
     /**
      * Initialize Menu on Main
      **/
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu?.findItem(R.id.search)
+        val searchView: SearchView = searchItem?.actionView as SearchView
+        searchView.setSearchableInfo(searchManager
+            .getSearchableInfo(componentName))
+        searchView.maxWidth = Integer.MAX_VALUE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                todoAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                todoAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -3,6 +3,8 @@ package com.imam.ido_simpletodolist.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.imam.ido_simpletodolist.R
 import com.imam.ido_simpletodolist.db.todo.Todo
@@ -11,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
+class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.ViewHolder>(), Filterable {
 
     private var todoList: List<Todo> = arrayListOf()
     private var filteredTodoList: List<Todo> = arrayListOf()
@@ -65,6 +67,39 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
         this.filteredTodoList = todoItems
         notifyDataSetChanged()
     }
+
+    /**
+     * Search Filter implementation
+     * */
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+                val charString = p0.toString()
+                filteredTodoList = if (charString.isEmpty()) {
+                    todoList
+                } else {
+                    val filteredList = arrayListOf<Todo>()
+                    for (row in todoList) {
+                        if (row.title.toLowerCase(Locale.ROOT).contains(charString.toLowerCase(Locale.ROOT)) || row.content.contains(charString.toLowerCase(Locale.ROOT))) {
+                            filteredList.add(row)
+                        }
+                    }
+                    filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = filteredTodoList
+                return filterResults
+            }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                filteredTodoList = p1?.values as List<Todo>
+                notifyDataSetChanged()
+            }
+
+        }
+    }
+
 
     /**
      * RecycleView touch event callbacks

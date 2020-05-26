@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+
     <item
         android:icon="@drawable/ic_sort"
         android:title="@string/sort"
@@ -23,11 +31,7 @@
                 app:showAsAction="never" />
         </menu>
     </item>
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search"
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/about"
         android:icon="@drawable/ic_about"
