@@ -3,6 +3,7 @@ package com.imam.ido_simpletodolist.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,10 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
         )
 
         fun bind(todo: Todo, listener: TodoEvents) {
+
+            //Apply Animations
+            itemView.layout_item.animation = AnimationUtils.loadAnimation(itemView.context,R.anim.fade_scale_animation)
+
             itemView.tv_title.text = todo.title
             itemView.tv_content.text = todo.content
             itemView.tv_createdate.text = dateFormat.format(todo.createAt)
@@ -80,7 +85,8 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
                 } else {
                     val filteredList = arrayListOf<Todo>()
                     for (row in todoList) {
-                        if (row.title.toLowerCase(Locale.ROOT).contains(charString.toLowerCase(Locale.ROOT)) || row.content.contains(charString.toLowerCase(Locale.ROOT))) {
+                        if (row.title.toLowerCase(Locale.ROOT).contains(charString.toLowerCase(
+                                Locale.ROOT)) || row.content.contains(charString.toLowerCase(Locale.ROOT))) {
                             filteredList.add(row)
                         }
                     }

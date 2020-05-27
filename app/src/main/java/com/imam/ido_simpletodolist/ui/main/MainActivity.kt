@@ -7,10 +7,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,12 +45,27 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         todoViewModel.getAllTodoList()?.observe(this, Observer {
             todoAdapter.setAllTodoList(it)
+            setVisibilityImageEmpty(it)
         })
 
         //FAB click listener
         fab_new_todo.setOnClickListener {
             val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
             startActivityForResult(intent, Constants.INTENT_CREATE_TODO)
+        }
+
+
+    }
+
+    private fun setVisibilityImageEmpty(allTodoList: List<Todo>){
+        if (allTodoList.isEmpty()) {
+            layout_recyclerview.visibility = View.GONE
+            img_empty_item.visibility = View.VISIBLE
+            img_empty_item.animation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_transition_animation)
+        }
+        else {
+            layout_recyclerview.visibility = View.VISIBLE
+            img_empty_item.visibility = View.GONE
         }
     }
 
@@ -138,16 +157,19 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
             R.id.sort_default -> {
                 todoViewModel.getAllTodoList()?.observe(this, Observer {
                     todoAdapter.setAllTodoList(it)
+                    setVisibilityImageEmpty(it)
                 })
             }
             R.id.sort_bycreate -> {
                 todoViewModel.getOrderbyCreateTodoList()?.observe(this, Observer {
                     todoAdapter.setAllTodoList(it)
+                    setVisibilityImageEmpty(it)
                 })
             }
             R.id.sort_bydue -> {
                 todoViewModel.getOrderbyDueDateTodoList()?.observe(this, Observer {
                     todoAdapter.setAllTodoList(it)
+                    setVisibilityImageEmpty(it)
                 })
             }
             R.id.search -> {
