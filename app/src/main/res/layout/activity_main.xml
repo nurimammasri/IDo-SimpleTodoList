@@ -4,8 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".ui.main.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+        app:subtitleTextColor="@color/white"
+        app:titleTextAppearance="@style/ToolbarTitleAppearance"
+        app:titleMarginStart="28dp"
+        app:titleTextColor="@color/white" />
 
     <include layout="@layout/content_main" />
 
@@ -16,14 +30,25 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="24dp"
         app:srcCompat="@drawable/ic_add" />
 
     <ImageView
         android:id="@+id/img_empty_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
         android:contentDescription="@string/image_empty_item"
         android:src="@drawable/img_empty_item" />
 
+    <TextView
+        android:id="@+id/info_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-65dp"
+        android:textAppearance="@style/textImageEmptyItem"
+        android:layout_below="@+id/img_empty_item"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:text="@string/info_empty" />
 </RelativeLayout>

@@ -14,7 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.ViewHolder>(), Filterable {
+class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.ViewHolder>(),
+    Filterable {
 
     private var todoList: List<Todo> = arrayListOf()
     private var filteredTodoList: List<Todo> = arrayListOf()
@@ -45,7 +46,8 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
         fun bind(todo: Todo, listener: TodoEvents) {
 
             //Apply Animations
-            itemView.layout_item.animation = AnimationUtils.loadAnimation(itemView.context,R.anim.fall_down_animation)
+            itemView.layout_item.animation =
+                AnimationUtils.loadAnimation(itemView.context, R.anim.fall_down_animation)
 
             itemView.tv_title.text = todo.title
             itemView.tv_content.text = todo.content
@@ -85,8 +87,12 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
                 } else {
                     val filteredList = arrayListOf<Todo>()
                     for (row in todoList) {
-                        if (row.title.toLowerCase(Locale.ROOT).contains(charString.toLowerCase(
-                                Locale.ROOT)) || row.content.contains(charString.toLowerCase(Locale.ROOT))) {
+                        if (row.title.toLowerCase(Locale.ROOT).contains(
+                                charString.toLowerCase(
+                                    Locale.ROOT
+                                )
+                            ) || row.content.contains(charString.toLowerCase(Locale.ROOT))
+                        ) {
                             filteredList.add(row)
                         }
                     }

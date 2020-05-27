@@ -34,13 +34,15 @@
             android:id="@+id/til_todo_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip">
+            android:layout_marginTop="5dip"
+            app:helperText="Set your main todo in here">
 
             <EditText
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Tittle"
+                android:fontFamily="@font/metropolis"
                 android:gravity="start"
                 android:hint="@string/title"
                 android:inputType="text"
@@ -55,13 +57,15 @@
             android:layout_height="0dp"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:helperText="Set your description todo in here">
 
             <EditText
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Content"
+                android:fontFamily="@font/metropolis"
                 android:gravity="top"
                 android:hint="@string/content"
                 android:inputType="textMultiLine|textFilter" />
@@ -70,7 +74,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/maincontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/setcontent"
@@ -85,18 +88,19 @@
             android:layout_marginRight="20dp"
             android:drawableStart="@drawable/ic_add_alarm"
             android:drawablePadding="8dp"
+            android:fontFamily="@font/metropolis"
             android:padding="8dp"
             android:text="@string/set_due_date"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
 
         <LinearLayout
-            android:id="@+id/container_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:animateLayoutChanges="true"
-            android:gravity="center"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -111,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:startIconDrawable="@drawable/ic_date">
 
                     <EditText
                         android:id="@+id/edt_date"
@@ -120,7 +125,7 @@
                         android:autofillHints="Date"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
-                        android:gravity="center"
+                        android:fontFamily="@font/metropolis"
                         android:hint="@string/date"
                         android:inputType="date"
                         android:textIsSelectable="false" />
@@ -129,9 +134,10 @@
                 <Button
                     android:id="@+id/btnDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
                     android:background="@drawable/btn_date"
+                    android:fontFamily="@font/biko_bold"
                     android:text="@string/set_date"
                     android:textColor="@color/white" />
 
@@ -148,7 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:startIconDrawable="@drawable/ic_time">
 
                     <EditText
                         android:id="@+id/edt_time"
@@ -157,7 +164,7 @@
                         android:autofillHints="Time"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
-                        android:gravity="center"
+                        android:fontFamily="@font/metropolis"
                         android:hint="@string/time"
                         android:inputType="date"
                         android:textIsSelectable="false" />
@@ -166,10 +173,10 @@
                 <Button
                     android:id="@+id/btnTime"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
                     android:background="@drawable/btn_date"
+                    android:fontFamily="@font/biko_bold"
                     android:text="@string/set_time"
                     android:textColor="@color/white" />
 
@@ -180,8 +187,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/biko_bold"
                 android:text="@string/reminder_set_for"
-                android:textSize="14sp" />
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,6 +203,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/biko_bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -201,6 +212,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="@font/biko_bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 

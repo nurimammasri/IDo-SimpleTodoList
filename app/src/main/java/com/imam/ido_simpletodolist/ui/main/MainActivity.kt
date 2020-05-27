@@ -4,17 +4,19 @@ import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.LiveData
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +36,14 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Setting Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbarMain)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "IDo"
+        toolbar.subtitle = "SimpleTodoList"
+        toolbar.setLogo(R.drawable.icon)
+
 
         //Setting up RecyclerView
         rv_todo_list.layoutManager = LinearLayoutManager(this)
@@ -57,15 +67,19 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
     }
 
-    private fun setVisibilityImageEmpty(allTodoList: List<Todo>){
+    private fun setVisibilityImageEmpty(allTodoList: List<Todo>) {
         if (allTodoList.isEmpty()) {
             layout_recyclerview.visibility = View.GONE
             img_empty_item.visibility = View.VISIBLE
-            img_empty_item.animation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_transition_animation)
-        }
-        else {
+            img_empty_item.animation =
+                AnimationUtils.loadAnimation(applicationContext, R.anim.fade_transition_animation)
+            info_empty.visibility = View.VISIBLE
+            info_empty.animation =
+                AnimationUtils.loadAnimation(applicationContext, R.anim.fade_transition_animation)
+        } else {
             layout_recyclerview.visibility = View.VISIBLE
             img_empty_item.visibility = View.GONE
+            info_empty.visibility = View.GONE
         }
     }
 
@@ -134,8 +148,16 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = menu?.findItem(R.id.search)
         val searchView: SearchView = searchItem?.actionView as SearchView
-        searchView.setSearchableInfo(searchManager
-            .getSearchableInfo(componentName))
+        val searchIcon = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_button)
+        searchIcon.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
+        val closeIcon = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
+        closeIcon.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
+        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        editText.setTextColor(resources.getColor(R.color.white))
+        searchView.setSearchableInfo(
+            searchManager
+                .getSearchableInfo(componentName)
+        )
         searchView.maxWidth = Integer.MAX_VALUE
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

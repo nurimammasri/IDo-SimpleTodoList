@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/ic_delete"
             android:ellipsize="end"
+            android:fontFamily="@font/biko_bold"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/black"
@@ -42,18 +43,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_drawable_create"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/blue"
             android:textSize="12sp"
             tools:text="Create Date" />
 
-        <com.codesgood.views.JustifiedTextView
+        <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_createdate"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_toStartOf="@+id/date"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textColor="@color/black"
             tools:text="@string/content" />
 
         <LinearLayout
@@ -64,32 +71,41 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="27dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/biko_bold"
                 android:text="@string/last_update"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_updatedate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_drawable_update"
+                android:drawablePadding="4dp"
+                android:textColor="@color/orange"
                 android:textSize="12sp"
                 tools:text="Update Date" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/biko_bold"
                 android:text="@string/due_date"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_duedate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_drawable_due"
+                android:drawablePadding="4dp"
+                android:textColor="@color/red"
                 android:textSize="12sp"
                 tools:text="Reminder Date" />
         </LinearLayout>

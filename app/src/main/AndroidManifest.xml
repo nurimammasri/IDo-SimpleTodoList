@@ -11,8 +11,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.create.CreateTodoActivity"
-            android:theme="@style/CreateTheme" />
-        <activity android:name=".ui.main.MainActivity">
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -26,4 +26,5 @@
     <string name="sort_create">Sort by Create Date</string>
     <string name="sort_due">Sort by Due Date</string>
     <string name="image_empty_item">Image Empty Item</string>
+    <string name="info_empty">There is no Todo available\nClik \'+\' to add new Todo</string>
 </resources>
