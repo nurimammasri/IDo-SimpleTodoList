@@ -45,7 +45,7 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
         fun bind(todo: Todo, listener: TodoEvents) {
 
             //Apply Animations
-            itemView.layout_item.animation = AnimationUtils.loadAnimation(itemView.context,R.anim.fade_scale_animation)
+            itemView.layout_item.animation = AnimationUtils.loadAnimation(itemView.context,R.anim.fall_down_animation)
 
             itemView.tv_title.text = todo.title
             itemView.tv_content.text = todo.content
