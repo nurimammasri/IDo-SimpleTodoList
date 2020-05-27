@@ -59,6 +59,7 @@
             android:layout_marginTop="8dp"
             android:layout_toStartOf="@+id/date"
             android:ellipsize="end"
+            android:fontFamily="@font/metropolis"
             android:maxLines="2"
             android:textColor="@color/black"
             tools:text="@string/content" />
@@ -76,10 +77,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/biko_bold"
+                android:fontFamily="@font/metropolis"
                 android:text="@string/last_update"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_updatedate"
@@ -94,10 +96,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/biko_bold"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/metropolis"
                 android:text="@string/due_date"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_duedate"

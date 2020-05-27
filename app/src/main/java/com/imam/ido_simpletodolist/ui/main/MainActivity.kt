@@ -1,6 +1,7 @@
 package com.imam.ido_simpletodolist.ui.main
 
 import android.app.Activity
+import android.app.Dialog
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageView
@@ -25,7 +27,10 @@ import com.imam.ido_simpletodolist.db.todo.Todo
 import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.alert_dialog_view.*
 import kotlinx.android.synthetic.main.content_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
@@ -94,9 +99,38 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
     //Callback when user clicks on view note
     override fun onViewClicked(todo: Todo) {
-        val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
-        intent.putExtra(Constants.INTENT_OBJECT, todo)
-        startActivityForResult(intent, Constants.INTENT_UPDATE_TODO)
+        // Constant for date format
+        val DATE_FORMAT = "EEE, dd/MM/yyyy HH:mm"
+
+        // Date formatter
+        val dateFormat = SimpleDateFormat(
+            DATE_FORMAT,
+            Locale.getDefault()
+        )
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.alert_dialog_view)
+        dialog.tv_alert_title.text = todo.title
+        dialog.tv_alert_desc.text = todo.content
+        dialog.tv_alert_create.text = dateFormat.format(todo.createAt)
+        dialog.tv_alert_update.text = dateFormat.format(todo.updateAt)
+        dialog.tv_alert_due.text = dateFormat.format(todo.dueAt)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog.btn_close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.btn_edit.setOnClickListener {
+            val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
+            intent.putExtra(Constants.INTENT_OBJECT, todo)
+            startActivityForResult(intent, Constants.INTENT_UPDATE_TODO)
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
 
