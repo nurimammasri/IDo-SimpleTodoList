@@ -15,7 +15,7 @@
     <string name="due_date">Due Date</string>
     <string name="set_date">Set Date</string>
     <string name="set_time">Set Time</string>
-    <string name="set_due_date">Set Due Date</string>
+    <string name="set_due_date">Set Due Date and Time</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="reminder_set_for">Reminder set for</string>
@@ -28,4 +28,8 @@
     <string name="image_empty_item">Image Empty Item</string>
     <string name="info_empty">There is no Todo available\nClik \'+\' to add new Todo</string>
     <string name="edit">Edit</string>
+    <string name="nur_imam_masri">NUR IMAM MASRI</string>
+    <string name="email">nurimammasri.01@gmail.com</string>
+    <string name="nim">D121181322</string>
+    <string name="costumize_your_todo">Costumize Your Todo</string>
 </resources>

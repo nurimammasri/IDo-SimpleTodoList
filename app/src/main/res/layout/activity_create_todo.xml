@@ -18,11 +18,27 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="@color/white" />
 
+    <TextView
+        android:id="@+id/title_template"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/metropolis"
+        android:padding="8dp"
+        android:text="@string/costumize_your_todo"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:id="@+id/setcontent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/title_template"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
@@ -35,6 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
+            android:background="@drawable/edt_custom_input"
+            android:padding="8dp"
             app:helperText="Set your main todo in here">
 
             <EditText
@@ -58,6 +76,8 @@
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
             android:layout_weight="1"
+            android:background="@drawable/edt_custom_input"
+            android:padding="8dp"
             app:helperText="Set your description todo in here">
 
             <EditText
@@ -84,12 +104,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:drawableStart="@drawable/ic_add_alarm"
             android:drawablePadding="8dp"
             android:fontFamily="@font/metropolis"
             android:padding="8dp"
+            android:textStyle="bold"
             android:text="@string/set_due_date"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -116,6 +136,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
+                    android:background="@drawable/edt_custom_input"
+                    android:padding="8dp"
                     app:startIconDrawable="@drawable/ic_date">
 
                     <EditText
@@ -155,6 +177,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
+                    android:background="@drawable/edt_custom_input"
+                    android:padding="8dp"
                     app:startIconDrawable="@drawable/ic_time">
 
                     <EditText

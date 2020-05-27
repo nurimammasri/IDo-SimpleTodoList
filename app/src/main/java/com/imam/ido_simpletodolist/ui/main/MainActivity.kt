@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.imam.ido_simpletodolist.R
 import com.imam.ido_simpletodolist.db.todo.Todo
+import com.imam.ido_simpletodolist.ui.about.AboutTodoActivity
 import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
@@ -228,11 +229,9 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
                     setVisibilityImageEmpty(it)
                 })
             }
-            R.id.search -> {
-
-            }
             R.id.about -> {
-
+                val intent = Intent(this@MainActivity, AboutTodoActivity::class.java)
+                startActivity(intent)
             }
         }
 

@@ -12,6 +12,7 @@
         <activity
             android:name=".ui.create.CreateTodoActivity"
             android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".ui.about.AboutTodoActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/AppThemeNoActionBar">
