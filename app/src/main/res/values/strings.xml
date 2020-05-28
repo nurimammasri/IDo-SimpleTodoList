@@ -32,4 +32,16 @@
     <string name="email">nurimammasri.01@gmail.com</string>
     <string name="nim">D121181322</string>
     <string name="costumize_your_todo">Costumize Your Todo</string>
+    <string name="skip">Skip</string>
+    <string name="intro_1">Have a lot of schedules and confused to arrange them?\nMake your todo list!</string>
+    <string name="get_started">Get Started</string>
+    <string name="header_splash">Bingung Mengatur Jadwal?\nBuat List Todo Kamu di IDo-SimpleTodoList</string>
+    <string name="componen_bubble_splash">Componen Bubble Splash</string>
+    <string name="logo_aplikasi">Logo Aolikasi</string>
+    <string name="ido_desc">IDo - SimpleTodoList</string>
+    <string name="justdecor">justDecor</string>
+    <string name="image_intro">Image Intro</string>
+    <string name="todo_list">Todo List</string>
+    <string name="header">header</string>
+    <string name="next">next</string>
 </resources>

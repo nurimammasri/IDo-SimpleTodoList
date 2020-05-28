@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splashscreen"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/bubble_splash1"
+        android:layout_width="404dp"
+        android:layout_height="404dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-108dp"
+        android:layout_marginTop="-193dp"
+        android:contentDescription="@string/componen_bubble_splash"
+        android:src="@drawable/bubble_splash1"
+        tools:ignore="RtlCompat" />
+
+    <ImageView
+        android:id="@+id/bubble_splash2"
+        android:layout_width="259dp"
+        android:layout_height="259dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="-119dp"
+        android:src="@drawable/bubble_splash1"
+        tools:ignore="RtlCompat"
+        android:contentDescription="@string/componen_bubble_splash" />
+
+    <ImageView
+        android:id="@+id/IDo"
+        android:layout_width="150dp"
+        android:layout_height="95dp"
+        android:layout_below="@+id/bubble_splash1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-90dp"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/logo_aplikasi" />
+
+    <TextView
+        android:id="@+id/IDo_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/IDo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:fontFamily="@font/metropolis"
+        android:textStyle="bold"
+        android:text="@string/ido_desc"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+
+    <TextView
+        android:id="@+id/header_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/IDo_desc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppins"
+        android:text="@string/header_splash"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_splash"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        app:lottie_autoPlay="true"
+        app:lottie_colorFilter="@color/colorPrimaryDark"
+        app:lottie_fileName="loader.json"
+        app:lottie_loop="true"
+        app:lottie_speed="2" />
+
+    <ImageView
+        android:id="@+id/bubble"
+        android:layout_width="62dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/bubble_splash2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/buble_splash"
+        tools:ignore="RtlCompat"
+        android:contentDescription="@string/componen_bubble_splash" />
+
+    <ImageView
+        android:layout_width="281dp"
+        android:layout_height="275dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-40dp"
+        android:layout_marginBottom="-15dp"
+        android:src="@drawable/list_componen"
+        tools:ignore="RtlCompat"
+        android:contentDescription="@string/justdecor" />
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="214dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-40dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/list_componen02"
+        tools:ignore="RtlCompat"
+        android:contentDescription="@string/justdecor" />
+</RelativeLayout>

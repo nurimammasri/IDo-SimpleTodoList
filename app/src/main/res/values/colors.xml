@@ -11,4 +11,9 @@
     <color name="red">#DF1010</color>
     <color name="blue">#03A9F4</color>
     <color name="orange">#FF9800</color>
+
+    <!--For Intro-->
+    <color name="white_transparent">#92FFFFFF</color>
+    <color name="grey_transparent">#CB726E6E</color>
+    <color name="white_skip">#00FFFFFF</color>
 </resources>

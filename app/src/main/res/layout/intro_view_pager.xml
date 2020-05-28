@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_intro1"
+    android:orientation="vertical"
+    tools:context=".ui.intro_ui.Intro">
+
+
+    <ImageView
+        android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/header_intro1"
+        android:contentDescription="@string/header" />
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="65dp"
+        android:layout_height="31dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-10dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_skip_intro"
+        android:drawableEnd="@drawable/ic_skip"
+        android:text="@string/skip"
+        android:textAllCaps="false"
+        tools:ignore="RtlCompat" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/footer_intro1"
+        android:orientation="vertical"
+        android:scaleType="fitXY">
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="52dp"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="@string/intro_1"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="48dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_indikator"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                app:tabBackground="@drawable/indicator_selector">
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <Button
+                android:id="@+id/btn_getStar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_getstar"
+                android:text="@string/get_started"
+                android:textColor="@color/white" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/boom_lottie"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="boom.json"
+                app:lottie_loop="true" />
+
+
+            <ImageButton
+                android:id="@+id/btn_next"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_next_intro"
+                android:src="@drawable/ic_next"
+                tools:ignore="RtlCompat"
+                android:contentDescription="@string/next" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

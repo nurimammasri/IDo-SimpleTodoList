@@ -14,8 +14,16 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".ui.about.AboutTodoActivity" />
         <activity
+            android:name=".ui.intro_ui.Intro"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".ui.intro_ui.IntroActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".ui.intro_ui.SplashScreen"
+            android:theme="@style/AppThemeNoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

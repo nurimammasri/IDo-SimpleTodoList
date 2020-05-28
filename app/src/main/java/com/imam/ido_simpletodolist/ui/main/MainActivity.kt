@@ -77,9 +77,9 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         if (allTodoList.isEmpty()) {
             layout_recyclerview.visibility = View.GONE
             img_empty_item.visibility = View.VISIBLE
+            info_empty.visibility = View.VISIBLE
             img_empty_item.animation =
                 AnimationUtils.loadAnimation(applicationContext, R.anim.fade_transition_animation)
-            info_empty.visibility = View.VISIBLE
             info_empty.animation =
                 AnimationUtils.loadAnimation(applicationContext, R.anim.fade_transition_animation)
         } else {
