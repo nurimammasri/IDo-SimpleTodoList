@@ -9,7 +9,7 @@ import com.imam.ido_simpletodolist.db.todo.Todo
 import com.imam.ido_simpletodolist.db.todo.TodoDao
 import com.imam.ido_simpletodolist.utils.DateConverter
 
-@Database(entities = [Todo::class], exportSchema = false, version = 1)
+@Database(entities = [Todo::class], exportSchema = false, version = 2)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -29,6 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                             AppDatabase::class.java,
                             DB_NAME
                         )
+                        .fallbackToDestructiveMigration()
                         .build()
                 }
             }
