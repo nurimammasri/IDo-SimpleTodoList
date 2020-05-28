@@ -103,6 +103,11 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
             itemView.setOnClickListener {
                 listener.onViewClicked(todo)
             }
+
+            itemView.setOnLongClickListener {
+                listener.onViewLongClicked(todo)
+                true
+            }
         }
     }
 
@@ -160,6 +165,7 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
     interface TodoEvents {
         fun onDeleteClicked(todo: Todo)
         fun onViewClicked(todo: Todo)
+        fun onViewLongClicked(todo: Todo)
         fun onCheckFinishedClicked(todo: Todo)
     }
 }

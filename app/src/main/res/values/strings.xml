@@ -46,4 +46,7 @@
     <string name="next">next</string>
     <string name="mark_as_finished">Mark as Done </string>
     <string name="mark_as_notfinish">Mark not Finished</string>
+    <string name="mark">Mark</string>
+    <string name="delete_all_complete">Delete All Complete</string>
+    <string name="delete_all">Delete All</string>
 </resources>

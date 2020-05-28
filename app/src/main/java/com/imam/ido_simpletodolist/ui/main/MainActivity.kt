@@ -28,9 +28,10 @@ import com.imam.ido_simpletodolist.ui.about.AboutTodoActivity
 import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.alert_dialog_longpress_view.*
 import kotlinx.android.synthetic.main.alert_dialog_view.*
+import kotlinx.android.synthetic.main.alert_dialog_view.btn_close
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.item_todo.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var todoAdapter: TodoAdapter
-    private var isfinished: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,6 +136,32 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
             val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
             intent.putExtra(Constants.INTENT_OBJECT, todo)
             startActivityForResult(intent, Constants.INTENT_UPDATE_TODO)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    //Callback when user clicks on view note
+    override fun onViewLongClicked(todo: Todo) {
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.alert_dialog_longpress_view)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialog.btn_close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.btn_delete_all.setOnClickListener {
+            todoViewModel.deleteAll(todo)
+            dialog.dismiss()
+        }
+
+        dialog.btn_delete_allcomplete.setOnClickListener {
+            todoViewModel.deleteFinished(todo)
             dialog.dismiss()
         }
 

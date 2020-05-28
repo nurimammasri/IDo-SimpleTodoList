@@ -12,8 +12,6 @@ class TodoRepository(application: Application) {
     private var todoes: LiveData<List<Todo>>? = null
     private var todoesOrderedbyCreate: LiveData<List<Todo>>? = null
     private var todoesOrderedbyDueDate: LiveData<List<Todo>>? = null
-    private var todoesFinished: LiveData<List<Todo>>? = null
-    private var todoesNotFinished: LiveData<List<Todo>>? = null
 
     init {
         val db = AppDatabase.getInstance(application.applicationContext)
@@ -21,8 +19,6 @@ class TodoRepository(application: Application) {
         todoes = todoDao?.getAllTodoList()
         todoesOrderedbyCreate = todoDao?.getOrderbyCreateTodoList()
         todoesOrderedbyDueDate = todoDao?.getOrderbyDueDateTodoList()
-        todoesFinished = todoDao?.getCheckFinishedTodoList(finished = true)
-        todoesNotFinished = todoDao?.getCheckFinishedTodoList(finished = false)
     }
 
     fun getAllTodoList(): LiveData<List<Todo>>? {
@@ -37,13 +33,6 @@ class TodoRepository(application: Application) {
         return todoesOrderedbyDueDate
     }
 
-    fun getAllFinishedTodoList(): LiveData<List<Todo>>? {
-        return todoesFinished
-    }
-
-    fun getAllNotFinishedTodoList(): LiveData<List<Todo>>? {
-        return todoesNotFinished
-    }
 
     fun insert(todo: Todo) = runBlocking {
         this.launch(Dispatchers.IO) {
@@ -51,10 +40,26 @@ class TodoRepository(application: Application) {
         }
     }
 
+    fun deleteAll(todo: Todo) {
+        runBlocking {
+            this.launch(Dispatchers.IO) {
+                todoDao?.deleteAll()
+            }
+        }
+    }
+
     fun delete(todo: Todo) {
         runBlocking {
             this.launch(Dispatchers.IO) {
                 todoDao?.deleteTodo(todo)
+            }
+        }
+    }
+
+    fun deleteFinishedTodoList(todo: Todo) {
+        runBlocking {
+            this.launch(Dispatchers.IO) {
+                todoDao?.deleteFinishedTodoList(finished = true)
             }
         }
     }

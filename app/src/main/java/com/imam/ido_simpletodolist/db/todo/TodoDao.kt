@@ -32,6 +32,9 @@ interface TodoDao {
     @Query("SELECT * FROM todo ORDER BY due_date ASC")
     fun getOrderbyDueDateTodoList(): LiveData<List<Todo>>
 
-    @Query("SELECT * FROM todo WHERE finished LIKE :finished")
-    fun getCheckFinishedTodoList(finished: Boolean): LiveData<List<Todo>>
+    @Query("DELETE FROM todo WHERE finished LIKE :finished")
+    fun deleteFinishedTodoList(finished: Boolean): Int
+
+    @Query("DELETE FROM todo")
+    fun deleteAll()
 }
