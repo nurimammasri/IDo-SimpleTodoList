@@ -44,4 +44,6 @@
     <string name="todo_list">Todo List</string>
     <string name="header">header</string>
     <string name="next">next</string>
+    <string name="mark_as_finished">Mark as Done </string>
+    <string name="mark_as_notfinish">Mark not Finished</string>
 </resources>

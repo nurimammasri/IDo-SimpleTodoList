@@ -35,12 +35,26 @@
             android:textStyle="bold"
             tools:text="@string/title" />
 
+        <TextView
+            android:id="@+id/tv_alert_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_alert_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="14dp"
+            android:fontFamily="@font/metropolis"
+            android:text="@string/mark_as_finished"
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:textSize="14sp" />
+
 
         <TextView
             android:id="@+id/tv_alert_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_alert_title"
+            android:layout_below="@id/tv_alert_check"
             android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/metropolis"
@@ -133,7 +147,6 @@
             android:textStyle="normal"
             tools:text="@string/due_date" />
 
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -143,6 +156,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
+
 
             <Button
                 android:id="@+id/btn_edit"

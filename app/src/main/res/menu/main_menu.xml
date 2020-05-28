@@ -29,6 +29,16 @@
                 android:icon="@drawable/ic_sort_due"
                 android:title="@string/sort_due"
                 app:showAsAction="never" />
+            <item
+                android:id="@+id/finished"
+                android:icon="@drawable/ic_sort_create"
+                android:title="@string/sort_create"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/notfinished"
+                android:icon="@drawable/ic_sort_due"
+                android:title="@string/sort_due"
+                app:showAsAction="never" />
         </menu>
     </item>
 

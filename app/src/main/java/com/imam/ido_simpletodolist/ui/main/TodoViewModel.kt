@@ -14,6 +14,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         repository.getOrderbyCreateTodoList()
     private val allOrderbyDueDateTodoList: LiveData<List<Todo>>? =
         repository.getOrderbyDueDateTodoList()
+    private val allFinishedTodoList: LiveData<List<Todo>>? =
+        repository.getAllFinishedTodoList()
+    private val allNotFinishedTodoList: LiveData<List<Todo>>? =
+        repository.getAllNotFinishedTodoList()
 
     fun insertTodo(todo: Todo) {
         repository.insert(todo)
@@ -37,5 +41,18 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getOrderbyDueDateTodoList(): LiveData<List<Todo>>? {
         return allOrderbyDueDateTodoList
+    }
+
+    fun setFinishedItemTodo(todo: Todo) {
+        todo.finished = !todo.finished
+        repository.update(todo)
+    }
+
+    fun getAllFinishedTodoList(): LiveData<List<Todo>>? {
+        return allFinishedTodoList
+    }
+
+    fun getAllNotFinishedTodoList(): LiveData<List<Todo>>? {
+        return allNotFinishedTodoList
     }
 }

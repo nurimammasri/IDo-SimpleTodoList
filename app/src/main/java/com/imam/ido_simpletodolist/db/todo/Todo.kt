@@ -33,5 +33,8 @@ data class Todo(
 
     @ColumnInfo(name = "due_date")
     @TypeConverters(DateConverter::class)
-    val dueAt: Date
+    val dueAt: Date,
+
+    @ColumnInfo(name = "finished")
+    var finished: Boolean
 ) : Parcelable

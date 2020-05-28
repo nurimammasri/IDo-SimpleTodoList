@@ -10,15 +10,16 @@
     card:cardUseCompatPadding="true">
 
     <ImageView
+        android:id="@+id/label_color"
         android:layout_width="6dp"
-        android:layout_height="110dp"
+        android:layout_height="140dp"
         android:contentDescription="@string/color"
         android:src="@color/colorPrimary" />
 
     <RelativeLayout
         android:id="@id/content"
         android:layout_width="wrap_content"
-        android:layout_height="110dp"
+        android:layout_height="140dp"
         android:paddingStart="15dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
@@ -68,15 +69,41 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ic_delete"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="27dp"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/check_finished"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="-2dp"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/round_checkbox" />
+
+                <TextView
+                    android:id="@+id/tv_check_finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/metropolis"
+                    android:textColor="@color/green"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/title_lastupdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/metropolis"
                 android:text="@string/last_update"
                 android:textColor="@color/black"
@@ -94,6 +121,7 @@
                 tools:text="Update Date" />
 
             <TextView
+                android:id="@+id/title_duedate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

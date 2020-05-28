@@ -13,13 +13,14 @@ interface TodoDao {
     @Delete
     suspend fun deleteTodo(todo: Todo)
 
-    @Query("UPDATE todo SET title = :title, content= :content, update_at=:update_at, due_date=:due_date WHERE id LIKE :id")
+    @Query("UPDATE todo SET title = :title, content= :content, update_at=:update_at, due_date=:due_date, finished = :finished  WHERE id LIKE :id")
     suspend fun updateTodo(
         id: Int?,
         title: String,
         content: String,
         update_at: Date,
-        due_date: Date
+        due_date: Date,
+        finished: Boolean
     )
 
     @Query("Select * from todo")
@@ -30,4 +31,7 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo ORDER BY due_date ASC")
     fun getOrderbyDueDateTodoList(): LiveData<List<Todo>>
+
+    @Query("SELECT * FROM todo WHERE finished LIKE :finished")
+    fun getCheckFinishedTodoList(finished: Boolean): LiveData<List<Todo>>
 }

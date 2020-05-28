@@ -30,6 +30,7 @@ import com.imam.ido_simpletodolist.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_dialog_view.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.item_todo.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var todoAdapter: TodoAdapter
+    private var isfinished: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +62,8 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         //Setting up ViewModel and LiveData
         todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         todoViewModel.getAllTodoList()?.observe(this, Observer {
-            todoAdapter.setAllTodoList(it)
             setVisibilityImageEmpty(it)
+            todoAdapter.setAllTodoList(it)
         })
 
         //FAB click listener
@@ -124,6 +126,12 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
             dialog.dismiss()
         }
 
+        if (todo.finished) {
+            dialog.tv_alert_check.text = getString(R.string.mark_as_finished)
+        } else {
+            dialog.tv_alert_check.text = getString(R.string.mark_as_notfinish)
+        }
+
         dialog.btn_edit.setOnClickListener {
             val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
             intent.putExtra(Constants.INTENT_OBJECT, todo)
@@ -132,6 +140,11 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         }
 
         dialog.show()
+    }
+
+    //Callback when user clicks on CheckFinished
+    override fun onCheckFinishedClicked(todo: Todo) {
+        todoViewModel.setFinishedItemTodo(todo)
     }
 
 
@@ -213,20 +226,20 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         when (item.itemId) {
             R.id.sort_default -> {
                 todoViewModel.getAllTodoList()?.observe(this, Observer {
-                    todoAdapter.setAllTodoList(it)
                     setVisibilityImageEmpty(it)
+                    todoAdapter.setAllTodoList(it)
                 })
             }
             R.id.sort_bycreate -> {
                 todoViewModel.getOrderbyCreateTodoList()?.observe(this, Observer {
-                    todoAdapter.setAllTodoList(it)
                     setVisibilityImageEmpty(it)
+                    todoAdapter.setAllTodoList(it)
                 })
             }
             R.id.sort_bydue -> {
                 todoViewModel.getOrderbyDueDateTodoList()?.observe(this, Observer {
-                    todoAdapter.setAllTodoList(it)
                     setVisibilityImageEmpty(it)
+                    todoAdapter.setAllTodoList(it)
                 })
             }
             R.id.about -> {

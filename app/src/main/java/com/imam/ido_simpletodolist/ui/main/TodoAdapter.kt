@@ -55,6 +55,47 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
             itemView.tv_updatedate.text = dateFormat.format(todo.updateAt)
             itemView.tv_duedate.text = dateFormat.format(todo.dueAt)
 
+            itemView.check_finished.isChecked = todo.finished
+
+            if (todo.finished) {
+                itemView.tv_check_finished.text =
+                    itemView.resources.getString(R.string.mark_as_finished)
+
+                itemView.layout_item.setCardBackgroundColor(itemView.resources.getColor(R.color.black))
+                itemView.label_color.setColorFilter(itemView.resources.getColor(R.color.grey))
+
+                itemView.tv_title.setTextColor(itemView.resources.getColor(R.color.grey))
+                itemView.tv_content.setTextColor(itemView.resources.getColor(R.color.grey))
+                itemView.title_lastupdate.setTextColor(itemView.resources.getColor(R.color.grey))
+                itemView.title_duedate.setTextColor(itemView.resources.getColor(R.color.grey))
+                itemView.ic_delete.setColorFilter(itemView.resources.getColor(R.color.grey))
+
+                itemView.tv_createdate.setTextColor(itemView.resources.getColor(R.color.grey))
+                itemView.tv_updatedate.setTextColor(itemView.resources.getColor(R.color.grey))
+                itemView.tv_duedate.setTextColor(itemView.resources.getColor(R.color.grey))
+            } else {
+                itemView.tv_check_finished.text =
+                    itemView.resources.getString(R.string.mark_as_notfinish)
+
+                itemView.layout_item.setCardBackgroundColor(itemView.resources.getColor(R.color.white))
+                itemView.label_color.setColorFilter(itemView.resources.getColor(R.color.colorPrimary))
+
+                itemView.tv_title.setTextColor(itemView.resources.getColor(R.color.black))
+                itemView.tv_content.setTextColor(itemView.resources.getColor(R.color.black))
+                itemView.title_lastupdate.setTextColor(itemView.resources.getColor(R.color.black))
+                itemView.title_duedate.setTextColor(itemView.resources.getColor(R.color.black))
+                itemView.ic_delete.setColorFilter(itemView.resources.getColor(R.color.black_delete))
+
+
+                itemView.tv_createdate.setTextColor(itemView.resources.getColor(R.color.blue))
+                itemView.tv_updatedate.setTextColor(itemView.resources.getColor(R.color.orange))
+                itemView.tv_duedate.setTextColor(itemView.resources.getColor(R.color.red))
+            }
+
+            itemView.check_finished.setOnClickListener {
+                listener.onCheckFinishedClicked(todo)
+            }
+
             itemView.ic_delete.setOnClickListener {
                 listener.onDeleteClicked(todo)
             }
@@ -119,5 +160,6 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
     interface TodoEvents {
         fun onDeleteClicked(todo: Todo)
         fun onViewClicked(todo: Todo)
+        fun onCheckFinishedClicked(todo: Todo)
     }
 }

@@ -88,6 +88,10 @@ class CreateTodoActivity : AppCompatActivity() {
             }
         })
 
+        //For mark as complete / not complete
+        if (todo?.finished == null){
+            todo?.finished = false
+        }
     }
 
     private fun prePopulateData(todo: Todo?) {
@@ -160,7 +164,8 @@ class CreateTodoActivity : AppCompatActivity() {
                     content = tv_content.text.toString(),
                     createAt = date,
                     updateAt = date,
-                    dueAt = it
+                    dueAt = it,
+                    finished = todo?.finished ?: false
                 )
             }
             Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
