@@ -133,12 +133,7 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
                 } else {
                     val filteredList = arrayListOf<Todo>()
                     for (row in todoList) {
-                        if (row.title.toLowerCase(Locale.ROOT).contains(
-                                charString.toLowerCase(
-                                    Locale.ROOT
-                                )
-                            ) || row.content.contains(charString.toLowerCase(Locale.ROOT))
-                        ) {
+                        if (row.title.toLowerCase(Locale.ROOT).contains(charString.toLowerCase(Locale.ROOT)) || row.content.toLowerCase(Locale.ROOT).contains(charString.toLowerCase(Locale.ROOT))) {
                             filteredList.add(row)
                         }
                     }
