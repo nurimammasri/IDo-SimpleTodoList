@@ -186,10 +186,28 @@ class CreateTodoActivity : AppCompatActivity() {
             if (todo != null) {
                 alarmReceiver.setOneTimeAlarm(
                     this,
+                    AlarmReceiver.TYPE_ONE_TIME,
                     todo.dueAt,
                     todo.title,
                     "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
                 )
+
+                if (switchDueHour.isChecked) {
+                    val calendar = Calendar.getInstance()
+                    calendar.time = todo.dueAt
+                    val minutes = calendar[Calendar.HOUR_OF_DAY] - 1
+                    calendar.set(Calendar.HOUR_OF_DAY, minutes)
+
+                    alarmReceiver.setBeforeHourAlarm(
+                        this,
+                        AlarmReceiver.TYPE_BEFORE_HOURS,
+                        calendar.time,
+                        todo.title,
+                        "5 minute later Your Item Todo Has Due, Please mark your completed items or update with edit"
+                    )
+                }
+
+
             }
 
             finish()

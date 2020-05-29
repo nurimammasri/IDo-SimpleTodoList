@@ -7,8 +7,6 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.widget.Toast
@@ -23,23 +21,26 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
-
-
     companion object {
+        const val TYPE_ONE_TIME = "OneTimeAlarm"
+        const val TYPE_BEFORE_HOURS = "BeforeHourAlarm"
+        const val EXTRA_TYPE = "type"
         const val EXTRA_TITLE = "title"
         const val EXTRA_MESSAGE = "message"
 
         // Siapkan 2 id untuk 2 macam alarm, onetime dan repeating
         private const val ID_ONETIME = 100
+        private const val ID_BEFORE_HOUR = 101
     }
 
     override fun onReceive(context: Context, intent: Intent) {
+        val type = intent.getStringExtra(EXTRA_TYPE)
         val message = intent.getStringExtra(EXTRA_MESSAGE)
         val title = intent.getStringExtra(EXTRA_TITLE)
 
 
         val notifId =
-            ID_ONETIME
+            if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) ID_ONETIME else ID_BEFORE_HOUR
 
         //Jika Anda ingin menampilkan dengan toast anda bisa menghilangkan komentar pada baris dibawah ini.
 //        showToast(context, title, message)
@@ -99,6 +100,7 @@ class AlarmReceiver : BroadcastReceiver() {
     // Metode ini digunakan untuk menjalankan alarm one time
     fun setOneTimeAlarm(
         context: Context,
+        type: String,
         date: Date,
         title: String,
         message: String
@@ -108,6 +110,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE, message)
         intent.putExtra(EXTRA_TITLE, title)
+        intent.putExtra(EXTRA_TYPE, type)
 
         val dateString = toDate(date)
         val calendar = Calendar.getInstance()
@@ -131,10 +134,48 @@ class AlarmReceiver : BroadcastReceiver() {
         Toast.makeText(context, "Alarm has set up", Toast.LENGTH_SHORT).show()
     }
 
-    fun cancelAlarm(context: Context) {
+    fun setBeforeHourAlarm(
+        context: Context,
+        type: String,
+        date: Date,
+        title: String,
+        message: String
+    ) {
+
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        val requestCode = ID_ONETIME
+        intent.putExtra(EXTRA_MESSAGE, message)
+        intent.putExtra(EXTRA_TITLE, title)
+        intent.putExtra(EXTRA_TYPE, type)
+
+        val dateString = toDate(date)
+        val calendar = Calendar.getInstance()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val millisSinceEpoch =
+                LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant()
+                    .toEpochMilli()
+            calendar.timeInMillis = millisSinceEpoch
+        } else {
+            calendar.time = date
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            ID_BEFORE_HOUR, intent, 0
+        )
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+
+        Toast.makeText(context, "Alarm has set up", Toast.LENGTH_SHORT).show()
+    }
+
+
+    fun cancelAlarm(context: Context, type: String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val requestCode =
+            if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) ID_ONETIME else ID_BEFORE_HOUR
         val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
         pendingIntent.cancel()
 
@@ -143,10 +184,11 @@ class AlarmReceiver : BroadcastReceiver() {
         Toast.makeText(context, "Alarm has been canceled", Toast.LENGTH_SHORT).show()
     }
 
-    fun finishAlarm(context: Context) {
+    fun finishAlarm(context: Context, type: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        val requestCode = ID_ONETIME
+        val requestCode =
+            if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) ID_ONETIME else ID_BEFORE_HOUR
         val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
         pendingIntent.cancel()
 

@@ -29,6 +29,7 @@ import com.imam.ido_simpletodolist.notification.AlarmReceiver
 import com.imam.ido_simpletodolist.ui.about.AboutTodoActivity
 import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
+import kotlinx.android.synthetic.main.activity_create_todo.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_dialog_longpress_view.*
 import kotlinx.android.synthetic.main.alert_dialog_view.*
@@ -139,7 +140,8 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         }
 
         dialog.btn_edit.setOnClickListener {
-            alarmReceiver.cancelAlarm(this)
+            alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_BEFORE_HOURS)
+            alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_ONE_TIME)
             val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
             intent.putExtra(Constants.INTENT_OBJECT, todo)
             startActivityForResult(intent, Constants.INTENT_UPDATE_TODO)
@@ -182,14 +184,30 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
     ) {
         val mills = todo.dueAt.time
         if (!todo.finished) {
-            alarmReceiver.finishAlarm(this)
+            alarmReceiver.finishAlarm(this, AlarmReceiver.TYPE_BEFORE_HOURS)
+            alarmReceiver.finishAlarm(this, AlarmReceiver.TYPE_ONE_TIME)
         } else if (todo.finished && mills > 0 && System.currentTimeMillis() < mills) {
             alarmReceiver.setOneTimeAlarm(
                 this,
+                AlarmReceiver.TYPE_ONE_TIME,
                 todo.dueAt,
                 todo.title,
                 "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
             )
+            if (switchDueHour.isChecked) {
+                val calendar = Calendar.getInstance()
+                calendar.time = todo.dueAt
+                val minutes = calendar[Calendar.HOUR_OF_DAY] - 1
+                calendar.set(Calendar.HOUR_OF_DAY, minutes)
+
+                alarmReceiver.setBeforeHourAlarm(
+                    this,
+                    AlarmReceiver.TYPE_BEFORE_HOURS,
+                    calendar.time,
+                    todo.title,
+                    "5 minute later Your Item Todo Has Due, Please mark your completed items or update with edit"
+                )
+            }
         } else {
             Snackbar.make(
                 itemView,
@@ -238,7 +256,8 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
             .setPositiveButton("Ya") { dialog, id ->
                 todoViewModel.deleteTodo(todo)
                 Toast.makeText(this, "Satu item berhasil dihapus", Toast.LENGTH_SHORT).show()
-                alarmReceiver.cancelAlarm(this)
+                alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_ONE_TIME)
+                alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_BEFORE_HOURS)
             }
             .setNegativeButton("Tidak") { dialog, id -> dialog.cancel() }
         val alertDialog = alertDialogBuilder.create()
