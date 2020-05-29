@@ -31,7 +31,7 @@
 
             <Button
                 android:id="@+id/btn_delete_all"
-                android:layout_width="107dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="24dp"
                 android:background="@drawable/btn_delete"
@@ -46,11 +46,10 @@
 
             <Button
                 android:id="@+id/btn_delete_allcomplete"
-                android:layout_width="165dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="24dp"
                 android:background="@drawable/btn_delete"
-
                 android:drawableStart="@drawable/ic_delete_finished"
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/biko_bold"
