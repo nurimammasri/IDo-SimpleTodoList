@@ -49,4 +49,6 @@
     <string name="mark">Mark</string>
     <string name="delete_all_complete">Delete All Complete</string>
     <string name="delete_all">Delete All</string>
+    <string name="passedDate">Date Passed, Enter Again</string>
+    <string name="passedTime">Time Passed, Enter Again</string>
 </resources>

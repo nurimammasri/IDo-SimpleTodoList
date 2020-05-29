@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -51,6 +52,7 @@ class CreateTodoActivity : AppCompatActivity() {
         btnTime.setOnClickListener {
             handleTimeButton()
         }
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -150,12 +152,12 @@ class CreateTodoActivity : AppCompatActivity() {
      * Sends the updated information back to calling Activity
      * */
     private fun saveTodo() {
-        if (validateFields()) {
-            val date = Date()
-            val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
-            val dueDate: Date? =
-                format.parse(edt_date.text.toString() + " " + edt_time.text.toString())
+        val date = Date()
+        val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
+        val dueDate: Date? =
+            format.parse(edt_date.text.toString() + " " + edt_time.text.toString())
 
+        if (validateFields(dueDate!!)) {
             val id = if (todo != null) todo?.id else null
             val todo = dueDate?.let {
                 Todo(
@@ -168,6 +170,8 @@ class CreateTodoActivity : AppCompatActivity() {
                     finished = todo?.finished ?: false
                 )
             }
+
+
             Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
             val intent = Intent()
             intent.putExtra(Constants.INTENT_OBJECT, todo)
@@ -179,7 +183,7 @@ class CreateTodoActivity : AppCompatActivity() {
     /**
      * Validation of EditText
      * */
-    private fun validateFields(): Boolean {
+    private fun validateFields(date: Date): Boolean {
         if (tv_title.text.isEmpty()) {
             til_todo_title.error = getString(R.string.pleaseEnterTitle)
             tv_title.requestFocus()
@@ -200,6 +204,23 @@ class CreateTodoActivity : AppCompatActivity() {
             edt_time.requestFocus()
             return false
         }
+        val calNow = Calendar.getInstance()
+        val calendar = calNow.clone() as Calendar
+        calendar.time = date
+        if (calendar <= calNow) {
+            // Today Set time passed, count to tomorrow
+            calendar.add(Calendar.DATE, 1);
+            edt_date.error = getString(R.string.passedDate)
+            edt_time.error = getString(R.string.passedDate)
+            edt_date.requestFocus()
+            edt_time.requestFocus()
+            Log.i("hasil", " =<0");
+            return false
+        } else if (calendar > calNow) {
+            Log.i("hasil", " > 0");
+        } else {
+            Log.i("hasil", " else ");
+        }
 
         return true
     }
@@ -210,7 +231,7 @@ class CreateTodoActivity : AppCompatActivity() {
     private fun handleDateButton() {
         val calendar = Calendar.getInstance()
         val year: Int = calendar.get(Calendar.YEAR)
-        val month: Int = calendar.get(Calendar.MONTH) + 1
+        val month: Int = calendar.get(Calendar.MONTH)
         val date: Int = calendar.get(Calendar.DATE)
 
         val datePickerDialog = DatePickerDialog(
@@ -221,10 +242,10 @@ class CreateTodoActivity : AppCompatActivity() {
                 calendar.set(Calendar.DATE, Date)
                 val dateString = toDate(calendar.time)
                 edt_date.setText(dateString)
+
             }, year, month, date
         )
         datePickerDialog.show()
-
     }
 
     private fun handleTimeButton() {
@@ -242,8 +263,9 @@ class CreateTodoActivity : AppCompatActivity() {
             }, hour, minute, true
         )
         timePickerDialog.show()
-
     }
+
+
 
     /**
      * Date Format
