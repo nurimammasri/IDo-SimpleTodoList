@@ -152,12 +152,13 @@ class CreateTodoActivity : AppCompatActivity() {
      * Sends the updated information back to calling Activity
      * */
     private fun saveTodo() {
-        val date = Date()
-        val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
-        val dueDate: Date? =
-            format.parse(edt_date.text.toString() + " " + edt_time.text.toString())
 
-        if (validateFields(dueDate!!)) {
+        if (validateFields()) {
+            val date = Date()
+            val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
+            val dueDate: Date? =
+                format.parse(edt_date.text.toString() + " " + edt_time.text.toString())
+
             val id = if (todo != null) todo?.id else null
             val todo = dueDate?.let {
                 Todo(
@@ -183,7 +184,7 @@ class CreateTodoActivity : AppCompatActivity() {
     /**
      * Validation of EditText
      * */
-    private fun validateFields(date: Date): Boolean {
+    private fun validateFields(): Boolean {
         if (tv_title.text.isEmpty()) {
             til_todo_title.error = getString(R.string.pleaseEnterTitle)
             tv_title.requestFocus()
@@ -204,9 +205,12 @@ class CreateTodoActivity : AppCompatActivity() {
             edt_time.requestFocus()
             return false
         }
+
+        val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
+        val dueDate: Date? = format.parse(edt_date.text.toString() + " " + edt_time.text.toString())
         val calNow = Calendar.getInstance()
         val calendar = calNow.clone() as Calendar
-        calendar.time = date
+        calendar.time = dueDate
         if (calendar <= calNow) {
             // Today Set time passed, count to tomorrow
             calendar.add(Calendar.DATE, 1);
