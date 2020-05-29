@@ -22,8 +22,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.imam.ido_simpletodolist.R
 import com.imam.ido_simpletodolist.db.todo.Todo
+import com.imam.ido_simpletodolist.notification.AlarmReceiver
 import com.imam.ido_simpletodolist.ui.about.AboutTodoActivity
 import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
@@ -38,12 +40,16 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
+    private lateinit var alarmReceiver: AlarmReceiver
+
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var todoAdapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        alarmReceiver = AlarmReceiver()
 
         //Setting Toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbarMain)
@@ -97,6 +103,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
      * */
     //Callback when user clicks on Delete note
     override fun onDeleteClicked(todo: Todo) {
+        alarmReceiver.cancelAlarm(this)
         showAlertDialog(todo)
     }
 
@@ -133,6 +140,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         }
 
         dialog.btn_edit.setOnClickListener {
+            alarmReceiver.cancelAlarm(this)
             val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
             intent.putExtra(Constants.INTENT_OBJECT, todo)
             startActivityForResult(intent, Constants.INTENT_UPDATE_TODO)
@@ -169,10 +177,34 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
     }
 
     //Callback when user clicks on CheckFinished
-    override fun onCheckFinishedClicked(todo: Todo) {
+    override fun onCheckFinishedClicked(
+        todo: Todo,
+        itemView: View
+    ) {
+        val mills = todo.dueAt.time
+        if (!todo.finished) {
+            alarmReceiver.finishAlarm(this)
+        } else if (todo.finished && mills > 0 && System.currentTimeMillis() < mills) {
+            alarmReceiver.setOneTimeAlarm(
+                this,
+                todo.dueAt,
+                todo.title,
+                "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
+            )
+        } else {
+            Snackbar.make(
+                itemView,
+                "Due Date has Expired, Delete Item or Edit",
+                Snackbar.LENGTH_LONG
+            )
+                .setAction("Edit") {
+                    val intent = Intent(this@MainActivity, CreateTodoActivity::class.java)
+                    intent.putExtra(Constants.INTENT_OBJECT, todo)
+                    startActivityForResult(intent, Constants.INTENT_UPDATE_TODO)
+                }.show()
+        }
         todoViewModel.setFinishedItemTodo(todo)
     }
-
 
     /**
      * Activity result callback

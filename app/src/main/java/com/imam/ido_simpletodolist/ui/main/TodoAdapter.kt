@@ -93,7 +93,7 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
             }
 
             itemView.check_finished.setOnClickListener {
-                listener.onCheckFinishedClicked(todo)
+                listener.onCheckFinishedClicked(todo, itemView)
             }
 
             itemView.ic_delete.setOnClickListener {
@@ -166,6 +166,9 @@ class TodoAdapter(todoEvents: TodoEvents) : RecyclerView.Adapter<TodoAdapter.Vie
         fun onDeleteClicked(todo: Todo)
         fun onViewClicked(todo: Todo)
         fun onViewLongClicked(todo: Todo)
-        fun onCheckFinishedClicked(todo: Todo)
+        fun onCheckFinishedClicked(
+            todo: Todo,
+            itemView: View
+        )
     }
 }

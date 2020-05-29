@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.imam.ido_simpletodolist.R
 import com.imam.ido_simpletodolist.db.todo.Todo
+import com.imam.ido_simpletodolist.notification.AlarmReceiver
 import com.imam.ido_simpletodolist.utils.Constants
 import kotlinx.android.synthetic.main.activity_create_todo.*
 import java.text.DateFormat
@@ -28,10 +29,13 @@ import java.util.*
 class CreateTodoActivity : AppCompatActivity() {
 
     private var todo: Todo? = null
+    private lateinit var alarmReceiver: AlarmReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_todo)
+
+        alarmReceiver = AlarmReceiver()
 
         result_duedate.visibility = View.INVISIBLE
         //Prepopulate existing title and content from intent
@@ -91,7 +95,7 @@ class CreateTodoActivity : AppCompatActivity() {
         })
 
         //For mark as complete / not complete
-        if (todo?.finished == null){
+        if (todo?.finished == null) {
             todo?.finished = false
         }
     }
@@ -177,6 +181,17 @@ class CreateTodoActivity : AppCompatActivity() {
             val intent = Intent()
             intent.putExtra(Constants.INTENT_OBJECT, todo)
             setResult(RESULT_OK, intent)
+
+
+            if (todo != null) {
+                alarmReceiver.setOneTimeAlarm(
+                    this,
+                    todo.dueAt,
+                    todo.title,
+                    "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
+                )
+            }
+
             finish()
         }
     }
@@ -254,13 +269,13 @@ class CreateTodoActivity : AppCompatActivity() {
 
     private fun handleTimeButton() {
         val calendar = Calendar.getInstance()
-        val hour: Int = calendar.get(Calendar.HOUR)
+        val hour: Int = calendar.get(Calendar.HOUR_OF_DAY)
         val minute: Int = calendar.get(Calendar.MINUTE)
 
         val timePickerDialog = TimePickerDialog(
             this,
             OnTimeSetListener { _, Hour, Minute ->
-                calendar.set(Calendar.HOUR, Hour)
+                calendar.set(Calendar.HOUR_OF_DAY, Hour)
                 calendar.set(Calendar.MINUTE, Minute)
                 val timeString = toTime(calendar.time)
                 edt_time.setText(timeString)
@@ -268,7 +283,6 @@ class CreateTodoActivity : AppCompatActivity() {
         )
         timePickerDialog.show()
     }
-
 
 
     /**
