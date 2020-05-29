@@ -103,7 +103,6 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
      * */
     //Callback when user clicks on Delete note
     override fun onDeleteClicked(todo: Todo) {
-        alarmReceiver.cancelAlarm(this)
         showAlertDialog(todo)
     }
 
@@ -239,6 +238,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
             .setPositiveButton("Ya") { dialog, id ->
                 todoViewModel.deleteTodo(todo)
                 Toast.makeText(this, "Satu item berhasil dihapus", Toast.LENGTH_SHORT).show()
+                alarmReceiver.cancelAlarm(this)
             }
             .setNegativeButton("Tidak") { dialog, id -> dialog.cancel() }
         val alertDialog = alertDialogBuilder.create()

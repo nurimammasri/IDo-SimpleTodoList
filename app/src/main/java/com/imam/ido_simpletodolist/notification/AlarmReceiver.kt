@@ -7,10 +7,11 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.imam.ido_simpletodolist.R
@@ -79,7 +80,7 @@ class AlarmReceiver : BroadcastReceiver() {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
 
             channel.enableVibration(true)
@@ -110,15 +111,16 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val dateString = toDate(date)
         val calendar = Calendar.getInstance()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val millisSinceEpoch = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val millisSinceEpoch =
+                LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
                     .atZone(ZoneId.systemDefault())
                     .toInstant()
                     .toEpochMilli()
-                calendar.timeInMillis = millisSinceEpoch
-            } else {
-                calendar.time = date
-            }
+            calendar.timeInMillis = millisSinceEpoch
+        } else {
+            calendar.time = date
+        }
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -128,6 +130,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         Toast.makeText(context, "Alarm has set up", Toast.LENGTH_SHORT).show()
     }
+
     fun cancelAlarm(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
@@ -153,7 +156,8 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun toDate(date: Date): String {
-        val outputFormatter: DateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        val outputFormatter: DateFormat =
+            SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
         return outputFormatter.format(date)
     }
 }
