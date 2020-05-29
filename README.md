@@ -49,7 +49,7 @@ Kelas C Android
 - [x] [Room](https://developer.android.com/topic/libraries/architecture/room)
 - [x] [Coroutines](https://developer.android.com/topic/libraries/architecture/coroutines)
 - [x] Animations
-- [x] Lottie Animation
+- [x] [Lottie Animation](https://lottiefiles.com/)
 
 ## Features
 
