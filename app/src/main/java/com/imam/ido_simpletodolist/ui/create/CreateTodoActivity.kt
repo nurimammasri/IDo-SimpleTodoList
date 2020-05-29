@@ -105,6 +105,9 @@ class CreateTodoActivity : AppCompatActivity() {
         tv_content.setText(todo?.content)
         edt_date.setText(todo?.dueAt?.let { toDate(it) })
         edt_time.setText(todo?.dueAt?.let { toTime(it) })
+        if (todo != null) {
+            switchDueHour.isChecked = todo.check_alarm_hour
+        }
         if (todo?.dueAt != null) {
             result_duedate.visibility = View.VISIBLE
             result_date.text = toDate(todo.dueAt)
