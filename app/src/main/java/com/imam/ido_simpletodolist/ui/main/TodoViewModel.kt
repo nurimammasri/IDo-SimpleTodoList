@@ -15,6 +15,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     private val allOrderbyDueDateTodoList: LiveData<List<Todo>>? =
         repository.getOrderbyDueDateTodoList()
 
+
     fun insertTodo(todo: Todo) {
         repository.insert(todo)
     }

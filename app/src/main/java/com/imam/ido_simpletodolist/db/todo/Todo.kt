@@ -36,5 +36,8 @@ data class Todo(
     val dueAt: Date,
 
     @ColumnInfo(name = "finished")
-    var finished: Boolean
+    var finished: Boolean,
+
+    @ColumnInfo(name = "check_alarm_hour")
+    var check_alarm_hour: Boolean
 ) : Parcelable

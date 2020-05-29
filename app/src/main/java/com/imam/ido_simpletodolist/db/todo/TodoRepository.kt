@@ -72,7 +72,8 @@ class TodoRepository(application: Application) {
                 todo.content,
                 todo.updateAt,
                 todo.dueAt,
-                todo.finished
+                todo.finished,
+                todo.check_alarm_hour
             )
         }
     }

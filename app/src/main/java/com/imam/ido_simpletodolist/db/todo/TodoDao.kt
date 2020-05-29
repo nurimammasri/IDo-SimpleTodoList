@@ -13,14 +13,15 @@ interface TodoDao {
     @Delete
     suspend fun deleteTodo(todo: Todo)
 
-    @Query("UPDATE todo SET title = :title, content= :content, update_at=:update_at, due_date=:due_date, finished = :finished  WHERE id LIKE :id")
+    @Query("UPDATE todo SET title = :title, content= :content, update_at=:update_at, due_date=:due_date, finished = :finished, check_alarm_hour = :check_alarm_hour  WHERE id LIKE :id")
     suspend fun updateTodo(
         id: Int?,
         title: String,
         content: String,
         update_at: Date,
         due_date: Date,
-        finished: Boolean
+        finished: Boolean,
+        check_alarm_hour: Boolean
     )
 
     @Query("Select * from todo")

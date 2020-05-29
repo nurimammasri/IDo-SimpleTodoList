@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
                 todo.title,
                 "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
             )
-            if (switchDueHour.isChecked) {
+            if (todo.check_alarm_hour) {
                 val calendar = Calendar.getInstance()
                 calendar.time = todo.dueAt
                 val hour = calendar[Calendar.HOUR_OF_DAY] - 1

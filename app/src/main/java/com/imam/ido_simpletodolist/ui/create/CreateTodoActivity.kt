@@ -172,16 +172,10 @@ class CreateTodoActivity : AppCompatActivity() {
                     createAt = date,
                     updateAt = date,
                     dueAt = it,
-                    finished = todo?.finished ?: false
+                    finished = todo?.finished ?: false,
+                    check_alarm_hour = todo?.check_alarm_hour ?: false
                 )
             }
-
-
-            Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
-            val intent = Intent()
-            intent.putExtra(Constants.INTENT_OBJECT, todo)
-            setResult(RESULT_OK, intent)
-
 
             if (todo != null) {
                 alarmReceiver.setOneTimeAlarm(
@@ -193,6 +187,7 @@ class CreateTodoActivity : AppCompatActivity() {
                 )
 
                 if (switchDueHour.isChecked) {
+                    todo.check_alarm_hour = true
                     val calendar = Calendar.getInstance()
                     calendar.time = todo.dueAt
                     val hour = calendar[Calendar.HOUR_OF_DAY] - 1
@@ -209,6 +204,11 @@ class CreateTodoActivity : AppCompatActivity() {
 
 
             }
+
+            Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
+            val intent = Intent()
+            intent.putExtra(Constants.INTENT_OBJECT, todo)
+            setResult(RESULT_OK, intent)
 
             finish()
         }
