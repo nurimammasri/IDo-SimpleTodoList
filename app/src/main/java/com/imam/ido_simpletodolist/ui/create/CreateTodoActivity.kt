@@ -249,6 +249,8 @@ class CreateTodoActivity : AppCompatActivity() {
             calendar.add(Calendar.DATE, 1);
             edt_date.error = getString(R.string.passedDate)
             edt_time.error = getString(R.string.passedDate)
+            til_todo_duedate.error = getString(R.string.passedDate)
+            til_todo_duetime.error = getString(R.string.passedDate)
             edt_date.requestFocus()
             edt_time.requestFocus()
             Log.i("hasil", " =<0");
