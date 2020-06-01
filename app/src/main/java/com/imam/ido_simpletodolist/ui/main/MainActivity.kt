@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         //to set work change icon navigation, must be on below drawer
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.icon)
+        supportActionBar?.setHomeAsUpIndicator(R.mipmap.icon)
 
         //Setting up RecyclerView
         rv_todo_list.layoutManager = LinearLayoutManager(this)
