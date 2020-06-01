@@ -231,7 +231,7 @@ class CreateTodoActivity : AppCompatActivity() {
             tv_title.requestFocus()
             return false
         } else {
-            til_todo_title.isEnabled = false
+            til_todo_title.isErrorEnabled = false
         }
 
         if (tv_content.text.isEmpty()) {
@@ -239,7 +239,7 @@ class CreateTodoActivity : AppCompatActivity() {
             tv_content.requestFocus()
             return false
         } else {
-            til_todo_content.isEnabled = false
+            til_todo_content.isErrorEnabled = false
         }
 
         if (edt_date.text.isEmpty()) {
@@ -247,7 +247,7 @@ class CreateTodoActivity : AppCompatActivity() {
             edt_date.requestFocus()
             return false
         } else {
-            til_todo_duedate.isEnabled = false
+            til_todo_duedate.isErrorEnabled = false
         }
 
         if (edt_time.text.isEmpty()) {
@@ -255,7 +255,7 @@ class CreateTodoActivity : AppCompatActivity() {
             edt_time.requestFocus()
             return false
         } else {
-            til_todo_duetime.isEnabled = false
+            til_todo_duetime.isErrorEnabled = false
         }
 
         val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
@@ -263,23 +263,27 @@ class CreateTodoActivity : AppCompatActivity() {
         val calNow = Calendar.getInstance()
         val calendar = calNow.clone() as Calendar
         calendar.time = dueDate
-        if (calendar <= calNow) {
-            // Today Set time passed, count to tomorrow
-            calendar.add(Calendar.DATE, 1);
-            edt_date.error = getString(R.string.passedDate)
-            edt_time.error = getString(R.string.passedDate)
-            til_todo_duedate.error = getString(R.string.passedDate)
-            til_todo_duetime.error = getString(R.string.passedDate)
-            edt_date.requestFocus()
-            edt_time.requestFocus()
-            Log.i("hasil", " =<0")
-            return false
-        } else if (calendar > calNow) {
-            Log.i("hasil", " > 0")
-            til_todo_duetime.isEnabled = false
-            til_todo_duedate.isEnabled = false
-        } else {
-            Log.i("hasil", " else ")
+        when {
+            calendar <= calNow -> {
+                // Today Set time passed, count to tomorrow
+                calendar.add(Calendar.DATE, 1)
+                edt_date.error = getString(R.string.passedDate)
+                edt_time.error = getString(R.string.passedTime)
+                til_todo_duedate.error = getString(R.string.passedDate)
+                til_todo_duetime.error = getString(R.string.passedTime)
+                edt_date.requestFocus()
+                edt_time.requestFocus()
+                Log.i("hasil", " =<0")
+                return false
+            }
+            calendar > calNow -> {
+                Log.i("hasil", " > 0")
+                til_todo_duetime.isErrorEnabled = false
+                til_todo_duedate.isErrorEnabled = false
+            }
+            else -> {
+                Log.i("hasil", " else ")
+            }
         }
 
         return true

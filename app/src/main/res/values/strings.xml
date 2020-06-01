@@ -46,10 +46,18 @@
     <string name="next">next</string>
     <string name="mark_as_finished">Mark as Done </string>
     <string name="mark_as_notfinish">Mark not Finished</string>
-    <string name="mark">Mark</string>
     <string name="delete_all_complete">Delete All Complete</string>
     <string name="delete_all">Delete All</string>
     <string name="passedDate">Date Passed, Enter Again</string>
     <string name="passedTime">Time Passed, Enter Again</string>
     <string name="set_notifications_1_hour_before">set notifications before 1 hour</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="setting">Setting</string>
+    <string name="more_apps">More Apps</string>
+    <string name="follow_us">Follow Us</string>
+    <string name="instagram">Instagram</string>
+    <string name="gmail">Email</string>
 </resources>

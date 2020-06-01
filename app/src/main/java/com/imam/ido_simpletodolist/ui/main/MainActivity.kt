@@ -15,10 +15,13 @@ import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +32,6 @@ import com.imam.ido_simpletodolist.notification.AlarmReceiver
 import com.imam.ido_simpletodolist.ui.about.AboutTodoActivity
 import com.imam.ido_simpletodolist.ui.create.CreateTodoActivity
 import com.imam.ido_simpletodolist.utils.Constants
-import kotlinx.android.synthetic.main.activity_create_todo.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_dialog_longpress_view.*
 import kotlinx.android.synthetic.main.alert_dialog_view.*
@@ -46,6 +48,8 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var todoAdapter: TodoAdapter
 
+    private lateinit var drawer: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,8 +61,19 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         setSupportActionBar(toolbar)
         supportActionBar?.title = "IDo"
         toolbar.subtitle = "SimpleTodoList"
-        toolbar.setLogo(R.drawable.icon)
 
+
+        drawer = findViewById(R.id.drawer_layout)
+        val toggle = ActionBarDrawerToggle(
+            this, drawer, toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+        //to set work change icon navigation, must be on below drawer
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.icon)
 
         //Setting up RecyclerView
         rv_todo_list.layoutManager = LinearLayoutManager(this)
@@ -80,6 +95,14 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         }
 
 
+    }
+
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun setVisibilityImageEmpty(allTodoList: List<Todo>) {
@@ -166,11 +189,15 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
 
         dialog.btn_delete_all.setOnClickListener {
             todoViewModel.deleteAll(todo)
+            alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_ONE_TIME)
+            alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_BEFORE_HOURS)
             dialog.dismiss()
         }
 
         dialog.btn_delete_allcomplete.setOnClickListener {
             todoViewModel.deleteFinished(todo)
+            alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_ONE_TIME)
+            alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_BEFORE_HOURS)
             dialog.dismiss()
         }
 
