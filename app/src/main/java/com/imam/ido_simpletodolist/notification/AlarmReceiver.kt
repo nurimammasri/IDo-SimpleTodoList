@@ -167,7 +167,7 @@ class AlarmReceiver : BroadcastReceiver() {
         )
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 
-        Toast.makeText(context, "Alarm has set up", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Alarm before 1 hour has set up", Toast.LENGTH_SHORT).show()
     }
 
 

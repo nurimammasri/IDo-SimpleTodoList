@@ -26,7 +26,7 @@
     <string name="sort_create">Sort by Create Date</string>
     <string name="sort_due">Sort by Due Date</string>
     <string name="image_empty_item">Image Empty Item</string>
-    <string name="info_empty">There is no Todo available\nClik \'+\' to add new Todo</string>
+    <string name="info_empty">There is no Todo available\nClick \'+\' to add new Todo</string>
     <string name="edit">Edit</string>
     <string name="nur_imam_masri">NUR IMAM MASRI</string>
     <string name="email">nurimammasri.01@gmail.com</string>
@@ -51,5 +51,5 @@
     <string name="delete_all">Delete All</string>
     <string name="passedDate">Date Passed, Enter Again</string>
     <string name="passedTime">Time Passed, Enter Again</string>
-    <string name="set_notifications_1_hour_before">set notifications 1 hour before</string>
+    <string name="set_notifications_1_hour_before">set notifications before 1 hour</string>
 </resources>

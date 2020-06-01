@@ -147,6 +147,7 @@ class CreateTodoActivity : AppCompatActivity() {
             .setMessage(dialogMessage)
             .setCancelable(false)
             .setPositiveButton("Ya") { dialog, id ->
+                todo?.let { setAlarm(it) }
                 finish()
             }
             .setNegativeButton("Tidak") { dialog, id -> dialog.cancel() }
@@ -181,31 +182,7 @@ class CreateTodoActivity : AppCompatActivity() {
             }
 
             if (todo != null) {
-                alarmReceiver.setOneTimeAlarm(
-                    this,
-                    AlarmReceiver.TYPE_ONE_TIME,
-                    todo.dueAt,
-                    todo.title,
-                    "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
-                )
-
-                if (switchDueHour.isChecked) {
-                    todo.check_alarm_hour = true
-                    val calendar = Calendar.getInstance()
-                    calendar.time = todo.dueAt
-                    val hour = calendar[Calendar.HOUR_OF_DAY] - 1
-                    calendar.set(Calendar.HOUR_OF_DAY, hour)
-
-                    alarmReceiver.setBeforeHourAlarm(
-                        this,
-                        AlarmReceiver.TYPE_BEFORE_HOURS,
-                        calendar.time,
-                        todo.title + "    Notification before 1 hours",
-                        "Soon Your Item Todo Has Due, Please mark your completed items or update with edit"
-                    )
-                }
-
-
+                setAlarm(todo)
             }
 
             Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
@@ -217,6 +194,34 @@ class CreateTodoActivity : AppCompatActivity() {
         }
     }
 
+    private fun setAlarm(todo: Todo) {
+        alarmReceiver.setOneTimeAlarm(
+            this,
+            AlarmReceiver.TYPE_ONE_TIME,
+            todo.dueAt,
+            todo.title,
+            "Your Item Todo Has Due Now, Please mark your completed items or update with edit"
+        )
+
+        if (switchDueHour.isChecked) {
+            todo.check_alarm_hour = true
+            val calendar = Calendar.getInstance()
+            calendar.time = todo.dueAt
+            val hour = calendar[Calendar.HOUR_OF_DAY] - 1
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
+
+            alarmReceiver.setBeforeHourAlarm(
+                this,
+                AlarmReceiver.TYPE_BEFORE_HOURS,
+                calendar.time,
+                todo.title + "    (Notification before 1 hours)",
+                "Soon Your Item Todo Has Due"
+            )
+        }
+
+
+    }
+
     /**
      * Validation of EditText
      * */
@@ -225,21 +230,32 @@ class CreateTodoActivity : AppCompatActivity() {
             til_todo_title.error = getString(R.string.pleaseEnterTitle)
             tv_title.requestFocus()
             return false
+        } else {
+            til_todo_title.isEnabled = false
         }
+
         if (tv_content.text.isEmpty()) {
             til_todo_content.error = getString(R.string.pleaseEnterContent)
             tv_content.requestFocus()
             return false
+        } else {
+            til_todo_content.isEnabled = false
         }
+
         if (edt_date.text.isEmpty()) {
             til_todo_duedate.error = getString(R.string.pleaseEnterDueDate)
             edt_date.requestFocus()
             return false
+        } else {
+            til_todo_duedate.isEnabled = false
         }
+
         if (edt_time.text.isEmpty()) {
             til_todo_duetime.error = getString(R.string.pleaseEnterDueTime)
             edt_time.requestFocus()
             return false
+        } else {
+            til_todo_duetime.isEnabled = false
         }
 
         val format = SimpleDateFormat("EEE, dd/MM/yyyy HH:mm", Locale.getDefault())
@@ -256,12 +272,14 @@ class CreateTodoActivity : AppCompatActivity() {
             til_todo_duetime.error = getString(R.string.passedDate)
             edt_date.requestFocus()
             edt_time.requestFocus()
-            Log.i("hasil", " =<0");
+            Log.i("hasil", " =<0")
             return false
         } else if (calendar > calNow) {
-            Log.i("hasil", " > 0");
+            Log.i("hasil", " > 0")
+            til_todo_duetime.isEnabled = false
+            til_todo_duedate.isEnabled = false
         } else {
-            Log.i("hasil", " else ");
+            Log.i("hasil", " else ")
         }
 
         return true

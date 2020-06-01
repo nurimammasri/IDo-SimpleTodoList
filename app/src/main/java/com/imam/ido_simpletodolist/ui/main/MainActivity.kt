@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
                     AlarmReceiver.TYPE_BEFORE_HOURS,
                     calendar.time,
                     todo.title + "    (Notification before 1 hours)",
-                    "Soon Your Item Todo Has Due, Please mark your completed items or update with edit"
+                    "Soon Your Item Todo Has Due"
                 )
             }
         } else {
