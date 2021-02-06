@@ -25,7 +25,6 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp">
 
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"

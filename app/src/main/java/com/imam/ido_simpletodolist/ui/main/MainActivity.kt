@@ -300,11 +300,11 @@ class MainActivity : AppCompatActivity(), TodoAdapter.TodoEvents {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = menu?.findItem(R.id.search)
         val searchView: SearchView = searchItem?.actionView as SearchView
-        val searchIcon = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_button)
+        val searchIcon = searchView.findViewById<ImageView>(R.id.search_button)
         searchIcon.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-        val closeIcon = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
+        val closeIcon = searchView.findViewById<ImageView>(R.id.search_close_btn)
         closeIcon.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        val editText = searchView.findViewById<EditText>(R.id.search_src_text)
         editText.setTextColor(resources.getColor(R.color.white))
         searchView.setSearchableInfo(
             searchManager

@@ -55,7 +55,8 @@ class SplashScreen : AppCompatActivity() {
         headerSplash.startAnimation(fadein)
 
 
-        /*Menjalankan Splash Screen dalam beberapa detik*/Handler()
+        /*Menjalankan Splash Screen dalam beberapa detik*/
+        Handler()
             .postDelayed({
                 val intent = Intent(this@SplashScreen, IntroActivity::class.java)
                 startActivity(intent)
