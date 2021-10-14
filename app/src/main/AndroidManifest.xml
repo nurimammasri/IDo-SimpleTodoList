@@ -28,7 +28,8 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".ui.intro_ui.SplashScreen"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/AppThemeNoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
