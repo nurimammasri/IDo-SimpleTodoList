@@ -52,8 +52,8 @@ class AlarmReceiver : BroadcastReceiver() {
     // Gunakan metode ini untuk menampilkan notifikasi
     private fun showAlarmNotification(
         context: Context,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         notifId: Int
     ) {
 

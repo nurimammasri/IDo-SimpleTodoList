@@ -121,8 +121,8 @@ class CreateTodoActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.save_todo -> {
                 saveTodo()
             }
@@ -130,7 +130,7 @@ class CreateTodoActivity : AppCompatActivity() {
                 showAlertDialog()
             }
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
